@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting started · Reason Native Web</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="To get started with your first web server simply call the start function with a handler function. The handler functions has the signature `Request.t =&gt; Response.t`. Where a `Request.t` is a record with everything you need from the underlying request and a `Response.t` is everything we need to create a response, `status`, `headers` and a `body`."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting started · Reason Native Web"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reason-native-web.github.io/"/><meta property="og:description" content="To get started with your first web server simply call the start function with a handler function. The handler functions has the signature `Request.t =&gt; Response.t`. Where a `Request.t` is a record with everything you need from the underlying request and a `Response.t` is everything we need to create a response, `status`, `headers` and a `body`."/><meta property="og:image" content="https://reason-native-web.github.io/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://reason-native-web.github.io/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dark.min.css"/><link rel="stylesheet" href="/css/code-block-buttons.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">Reason Native Web</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/projects/project-diacetyl" target="_self">Projects</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/http/http-getting-started" target="_self">Guides</a></li><li class=""><a href="/docs/api" target="_self">API</a></li><li class=""><a href="/help" target="_self">Help</a></li><li class=""><a href="https://github.com/reason-native-web" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Diacetyl</span></h2></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Diacetyl</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/http/http-getting-started">Getting started</a></li><li class="navListItem"><a class="navItem" href="/docs/http/static-files">Static files</a></li><li class="navListItem"><a class="navItem" href="/docs/http/simple-switch-based-router">Simple switch-based router</a></li><li class="navListItem"><a class="navItem" href="/docs/http/with-routes-package">Useage with Routes library</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JOSE</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/jose/jose-getting-started">Getting started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">OpenID Connect</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/oidc/oidc-getting-started">Getting started</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Getting started</h1></header><article><div><span><p>To get started with your first web server simply call the start function with a handler function. The handler functions has the signature <code>Request.t =&gt; Response.t</code>. Where a <code>Request.t</code> is a record with everything you need from the underlying request and a <code>Response.t</code> is everything we need to create a response, <code>status</code>, <code>headers</code> and a <code>body</code>.</p>
+<p>There are some helpers to create some of the common responses, we will use the text response for a &quot;Hello world!&quot; response.</p>
+<div class="tabs"><div class="nav-tabs"><div id="tab-group-1-tab-2" class="nav-link active" data-group="group_1" data-tab="tab-group-1-content-2">Reason</div><div id="tab-group-1-tab-3" class="nav-link" data-group="group_1" data-tab="tab-group-1-content-3">OCaml</div></div><div class="tab-content"><div id="tab-group-1-content-2" class="tab-pane active" data-group="group_1" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="token keyword">let</span> handler <span class="token operator">=</span> _request <span class="token operator">=></span> <span class="token class-name">Diacetyl</span><span class="token punctuation">.</span><span class="token class-name">Server</span><span class="token punctuation">.</span><span class="token class-name">Response</span><span class="token punctuation">.</span><span class="token class-name">Text</span><span class="token punctuation">.</span>make<span class="token punctuation">(</span><span class="token string">"Hello world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br /><br /><span class="token class-name">Diacetyl</span><span class="token punctuation">.</span><span class="token class-name">Server</span><span class="token punctuation">.</span>start<span class="token punctuation">(</span>handler<span class="token punctuation">)</span><br /><span class="token operator">|></span> <span class="token class-name">Lwt_main</span><span class="token punctuation">.</span>run<span class="token punctuation">;</span><br /></code></pre>
+</span></div></div><div id="tab-group-1-content-3" class="tab-pane" data-group="group_1" tabindex="-1"><div><span><pre><code class="hljs css language-ocaml"><span class="token keyword">let</span> handler <span class="token punctuation">_</span>request <span class="token operator">=</span> Diacetyl<span class="token punctuation">.</span>Server<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>make "Hello world<span class="token operator">!</span> <span class="token keyword">in</span><br />Diacetyl<span class="token punctuation">.</span>Server<span class="token punctuation">.</span>start handler<br /><span class="token operator">|></span> Lwt<span class="token punctuation">_</span>main<span class="token punctuation">.</span>run<br /></code></pre>
+</span></div></div></div></div>
+<p>The code above will answer every request with the text &quot;Hello world!&quot;.</p>
+<p>If you have <a href="https://esy.sh"><code>esy</code></a> and <a href="https://github.com/esy/pesy"><code>pesy</code></a> installed you can get a template that is ready to be used straight away by running <code>pesy --template=https://github.com/reason-native-web/diacetyl-hello-world-pesy-template</code> in a empty folder.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/http/static-files"><span>Static files</span><span class="arrow-next"> →</span></a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/en/http/getting-started.html">Your first web server</a><a href="/docs/en/guides.html">Guides</a><a href="/docs/en/api.html">API Reference</a></div><div><h5>Community</h5><a href="https://discord.gg/uPzQwfa">Reason Discord</a><a href="https://reasonml.chat/">ReasonML Forum</a><a href="https://discord.gg/Xge2f7Z">OCaml Discord</a><a href="https://discuss.ocaml.org/">OCaml Discuss</a></div><div><h5>More</h5><a href="https://github.com/reason-native-web">GitHub</a></div></section><section class="copyright">Copyright © 2019 Your Name or Your Company Name</section></footer></div></body></html>
